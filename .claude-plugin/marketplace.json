@@ -1,0 +1,12 @@
+{
+  "name": "boska-notes",
+  "owner": { "name": "Boskaa" },
+  "plugins": [
+    {
+      "name": "boska-notes",
+      "source": "./",
+      "description": "Turn lecture slides and handwritten notes into a polished LaTeX study-guide PDF.",
+      "version": "1.0.0"
+    }
+  ]
+}

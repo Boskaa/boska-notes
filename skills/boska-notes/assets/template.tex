@@ -1,0 +1,131 @@
+% boska-notes study-guide template -- compile with: xelatex guide.tex (twice)
+% Replace every <<...>> placeholder. Keep the preamble unless the user asks otherwise.
+\documentclass[11pt,a4paper]{article}
+\usepackage{mathptmx}                       % Times-style math
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[no-math]{fontspec}
+% Times New Roman if installed, otherwise metric-compatible fallbacks
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{%
+  \IfFontExistsTF{Liberation Serif}{\setmainfont{Liberation Serif}}{\setmainfont{TeX Gyre Termes}}}
+\usepackage[a4paper,top=2.3cm,bottom=2.4cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{graphicx,float,xcolor,array,booktabs,multirow}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,enumitem,fancyhdr,needspace}
+\usepackage[font=small,justification=raggedright,singlelinecheck=false,labelfont={bf,color=secred}]{caption}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+% ---------- colours ----------
+\definecolor{secred}{RGB}{170,20,30}
+\definecolor{subred}{RGB}{195,55,45}
+\definecolor{srcgray}{RGB}{110,110,110}
+\definecolor{defblue}{RGB}{30,80,150}
+\definecolor{fmlred}{RGB}{170,20,30}
+\definecolor{remgreen}{RGB}{30,120,60}
+\definecolor{limorange}{RGB}{200,110,0}
+\definecolor{addpurple}{RGB}{105,60,150}
+\definecolor{recapteal}{RGB}{20,110,120}
+
+% ---------- headings (red hierarchy; keep headings with their content) ----------
+\titleformat{\section}{\needspace{10\baselineskip}\Large\bfseries\color{secred}}{\thesection}{0.6em}{}[{\color{secred}\titlerule[0.8pt]}]
+\titleformat{\subsection}{\needspace{8\baselineskip}\large\bfseries\color{subred}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\needspace{6\baselineskip}\normalsize\bfseries\itshape\color{subred}}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{18pt}{4pt}
+\titlespacing*{\subsection}{0pt}{14pt}{2pt}
+\titlespacing*{\subsubsection}{0pt}{10pt}{2pt}
+
+% source reference under a heading, separated from the text
+\newcommand{\src}[1]{\par\nopagebreak\vspace{1pt}{\footnotesize\color{srcgray}\textsf{Source: #1}}\par\nopagebreak\vspace{4pt}}
+% source reference inside a caption
+\newcommand{\figsrc}[1]{{\color{srcgray}\footnotesize[#1]}}
+% every chapter starts on a new page: write \chapterbreak before each \section
+\newcommand{\chapterbreak}{\clearpage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist{itemsep=2pt,topsep=3pt,leftmargin=1.6em}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\color{srcgray}<<Course name>> -- Study guide}
+\fancyhead[R]{\small\color{srcgray}<<Short topic>>}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+% ---------- callouts (source content only) ----------
+\newtcolorbox{defbox}[1][]{enhanced,breakable,colback=defblue!5,colframe=defblue,boxrule=0.5pt,leftrule=2.5pt,arc=1pt,
+  fonttitle=\bfseries\small,coltitle=defblue,colbacktitle=defblue!5,attach title to upper={\ },title={Definition#1}}
+\newtcolorbox{fmlbox}[1][]{enhanced,colback=fmlred!4,colframe=fmlred,boxrule=0.5pt,leftrule=2.5pt,arc=1pt,
+  fonttitle=\bfseries\small,coltitle=fmlred,colbacktitle=fmlred!4,attach title to upper={\ },title={Formula#1}}
+\newtcolorbox{rembox}[1][]{enhanced,breakable,colback=remgreen!5,colframe=remgreen,boxrule=0.5pt,leftrule=2.5pt,arc=1pt,
+  fonttitle=\bfseries\small,coltitle=remgreen,colbacktitle=remgreen!5,attach title to upper={\ },title={Remember#1}}
+\newtcolorbox{limbox}[1][]{enhanced,breakable,colback=limorange!6,colframe=limorange,boxrule=0.5pt,leftrule=2.5pt,arc=1pt,
+  fonttitle=\bfseries\small,coltitle=limorange,colbacktitle=limorange!6,attach title to upper={\ },title={Limit#1}}
+% end-of-chapter recap (source content only)
+\newtcolorbox{recapbox}[1][]{enhanced,breakable,colback=recapteal!5,colframe=recapteal,boxrule=0.6pt,arc=2pt,
+  fonttitle=\bfseries,coltitle=white,colbacktitle=recapteal,title={Chapter recap#1}}
+
+% ---------- ADDED material: purple, dashed, italic, explicitly labelled ----------
+\newtcolorbox{addbox}{enhanced,breakable,colback=addpurple!5,colframe=addpurple!70,boxrule=0.6pt,arc=1pt,
+  borderline={0.4pt}{1.5pt}{addpurple!40,dashed},fontupper=\small\itshape,
+  title={\textsf{\upshape ADDED EXPLANATION -- not in the source}},fonttitle=\footnotesize\bfseries,coltitle=white,colbacktitle=addpurple!75}
+% same, non-breakable: use inside minipages / side-by-side layouts
+\newtcolorbox{addboxnb}{enhanced,colback=addpurple!5,colframe=addpurple!70,boxrule=0.6pt,arc=1pt,
+  borderline={0.4pt}{1.5pt}{addpurple!40,dashed},fontupper=\small\itshape,
+  title={\textsf{\upshape ADDED EXPLANATION -- not in the source}},fonttitle=\footnotesize\bfseries,coltitle=white,colbacktitle=addpurple!75}
+
+% handy math macros
+\newcommand{\seg}[1]{\overrightarrow{#1}}
+\newcommand{\vv}[1]{\vec{#1}}
+
+\begin{document}
+
+\begin{center}
+{\color{secred}\rule{\linewidth}{1pt}}\\[6pt]
+{\fontsize{22}{26}\selectfont\bfseries\color{secred} <<Main title>>}\\[6pt]
+{\Large <<Subtitle>>}\\[6pt]
+{\color{secred}\rule{\linewidth}{1pt}}
+\end{center}
+
+\vspace{4pt}
+{\small
+\textbf{Source documents.} <<Doc. A -- \emph{Title} (n pages); Doc. B -- ...>>
+References in grey (e.g.\ \textsf{\color{srcgray}Doc.~A, p.~1}) indicate the slide/page of origin.\par}
+
+\vspace{4pt}
+{\small\textbf{Legend of the boxes.}\quad
+{\color{defblue}\textbf{Definition}}\quad {\color{fmlred}\textbf{Formula}}\quad {\color{remgreen}\textbf{Remember}}\quad {\color{limorange}\textbf{Limit}}\quad {\color{recapteal}\textbf{Chapter recap}}\quad
+{\color{addpurple}\textbf{Added explanation}} (purple, dashed border, italics): reformulations written for this guide; they are \emph{not} part of the source.\par}
+
+{\small\setlength{\parskip}{0pt}\tableofcontents}
+
+%======================================================================
+\chapterbreak
+\section{<<Chapter title>>}
+\src{<<Doc. A, pp. 1--4>>}
+
+\subsection{<<Section title>>}
+\src{<<Doc. A, p. 1>>}
+
+<<Justified paragraph rewritten from the source.>>
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\linewidth]{fig/<<name>>.png}
+\caption{<<What the figure shows.>> \figsrc{Doc.~A, p.~1}}
+\end{figure}
+
+\begin{fmlbox}[: <<name>>]
+\[ <<formula>> \]
+\end{fmlbox}
+
+\begin{addbox}
+<<Your own clarification of a step. Never put new facts or data here.>>
+\end{addbox}
+
+\begin{recapbox}
+\begin{itemize}
+\item <<Key definition / formula of the chapter, from the source>>
+\end{itemize}
+\end{recapbox}
+
+\end{document}

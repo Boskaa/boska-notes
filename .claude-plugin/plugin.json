@@ -1,0 +1,8 @@
+{
+  "name": "boska-notes",
+  "version": "1.0.0",
+  "description": "Turn lecture slides and handwritten notes into a polished LaTeX study-guide PDF.",
+  "author": { "name": "Boskaa" },
+  "repository": "https://github.com/Boskaa/boska-notes",
+  "license": "MIT"
+}
