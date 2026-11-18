@@ -57,7 +57,7 @@ The script copies `skills/boska-notes/` into `~/.claude/skills/`, `~/.codex/skil
 
 ### Claude app (claude.ai / desktop)
 
-Download `boska-notes.skill` from the [latest release](https://github.com/Boskaa/boska-notes/releases/latest) and open it in Claude, then click **Save skill** (or upload it under *Settings → Skills*).
+Download [`dist/boska-notes.skill`](https://github.com/Boskaa/boska-notes/raw/main/dist/boska-notes.skill) and open it in Claude, then click **Save skill** (or upload it under *Settings → Skills*).
 
 ### Manual
 
@@ -109,6 +109,7 @@ skills/boska-notes/
 .claude-plugin/              # Claude Code plugin + marketplace manifests
 install.sh, install.ps1      # multi-agent installers
 examples/                    # sample output
+dist/boska-notes.skill       # packaged skill for the Claude app
 ```
 
 ## Customising
